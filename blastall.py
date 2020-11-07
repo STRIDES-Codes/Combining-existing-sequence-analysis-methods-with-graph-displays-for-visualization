@@ -20,6 +20,16 @@ def blastall(query, subs, count):
     subprocess.call(local_blast_cmd, shell=True)
     blast_files = ' '.join([query + x for x in ['.nhr',
                                                 '.nin',
-                                                '.nsq',
-                                                '.fasta']])
+                                                '.nsq']])
     subprocess.call('rm ' + blast_files, shell=True)
+
+
+if __name__ == "__main__":
+
+    from sys import argv
+
+    query = argv[1]
+    subs = argv[2]
+    count = argv[3]
+
+    blastall(query, subs, count)
