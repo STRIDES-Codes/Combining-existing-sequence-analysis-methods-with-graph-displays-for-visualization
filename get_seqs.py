@@ -52,14 +52,16 @@ def get_seqs(base_dir, min_len, max_len, max_nambig, max_ambig_run, max_pambig):
 
     for i, fname in enumerate(fnames):
 
-        seq = load_seq(base_dir, fname)
+        if i > 200: # why is this necessary, need to investigate, but fine for testing for now
 
-        if filter_seqs(seq,
-                       min_len, max_len,
-                       max_nambig, max_ambig_run, max_pambig) is not True:
+            seq = load_seq(base_dir, fname)
 
-            good_id_list.append('.'.join(fname.split('.')[:2]))
-            good_seqs.append(seq)
+            if filter_seqs(seq,
+                           min_len, max_len,
+                           max_nambig, max_ambig_run, max_pambig) is not True:
+
+                 good_id_list.append('.'.join(fname.split('.')[:2]))
+                 good_seqs.append(seq)
 
     with open('good_ids.txt', 'w') as f:
         f.write('\n'.join(good_id_list))
