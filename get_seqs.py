@@ -11,28 +11,28 @@ import subprocess
 
 def available_seqs(base_dir):
 
-    fname_list = subprocess.getoutput('ls '+base_dir)
+    fname_list = subprocess.getoutput("ls " + base_dir)
 
-    for x in fname_list.split('\n'):
-            yield x
+    for x in fname_list.split("\n"):
+        yield x
 
 
-def load_seq(base_dir, fname, frmt='fasta'):
+def load_seq(base_dir, fname, frmt="fasta"):
 
-    return SeqIO.read(base_dir+fname, frmt)
+    return SeqIO.read(base_dir + fname, frmt)
 
 
 def filter_seqs(seq, min_len, max_len, max_nambig, max_ambig_run, max_pambig):
 
     slen = len(seq.seq)
 
-    ambig_codes = '[YRWSKMDVHBXN]'
-    max_ambig = ''.join([ambig_codes, '{', str(max_ambig_run+1), '}'])
+    ambig_codes = "[YRWSKMDVHBXN]"
+    max_ambig = "".join([ambig_codes, "{", str(max_ambig_run + 1), "}"])
 
     if min_len <= slen <= max_len:
 
         ambig_count = len(re.findall(ambig_codes, str(seq.seq)))
-        pambig = 100*ambig_count/slen
+        pambig = 100 * ambig_count / slen
 
         if (ambig_count <= max_nambig) & (pambig <= max_pambig):
 
@@ -52,21 +52,26 @@ def get_seqs(base_dir, min_len, max_len, max_nambig, max_ambig_run, max_pambig):
 
     for i, fname in enumerate(fnames):
 
-        if i > 200: # why is this necessary, need to investigate, but fine for testing for now
+        if (
+            i > 200
+        ):  # why is this necessary, need to investigate, but fine for testing for now
 
             seq = load_seq(base_dir, fname)
 
-            if filter_seqs(seq,
-                           min_len, max_len,
-                           max_nambig, max_ambig_run, max_pambig) is not True:
+            if (
+                filter_seqs(
+                    seq, min_len, max_len, max_nambig, max_ambig_run, max_pambig
+                )
+                is not True
+            ):
 
-                 good_id_list.append('.'.join(fname.split('.')[:2]))
-                 good_seqs.append(seq)
+                good_id_list.append(".".join(fname.split(".")[:2]))
+                good_seqs.append(seq)
 
-    with open('good_ids.txt', 'w') as f:
-        f.write('\n'.join(good_id_list))
+    with open("good_ids.txt", "w") as f:
+        f.write("\n".join(good_id_list))
 
-    SeqIO.write(good_seqs, 'good_seqs.fasta', 'fasta')
+    SeqIO.write(good_seqs, "good_seqs.fasta", "fasta")
 
 
 if __name__ == "__main__":
