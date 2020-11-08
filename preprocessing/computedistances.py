@@ -116,7 +116,7 @@ if __name__ == "__main__":
         "--distance_metric",
         choices=list(metric_dict.keys()),
         default="short_hamming",
-        help="The distance metric to use. DEFAULT: hamming",
+        help="The distance metric to use. DEFAULT: short_hamming",
     )
 
     args = parser.parse_args()
