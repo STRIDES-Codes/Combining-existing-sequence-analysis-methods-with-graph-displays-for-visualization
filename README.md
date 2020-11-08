@@ -50,7 +50,9 @@ There are a total of 39,340 SARS-CoV-2 sequences as of Nov 7 2020
 
 After running through filtering script, 28,325 sequences are left.
 
-
+## Pangolin note
+One of the steps is done using samtools, which has a limit to the number of characters allowed in sequence titles. If you download your sequence FASTAs from GenBank, they will probably be over this limit. We used this to trim titles (will not work if your sequence is all on 1 line)
+`cut -c -80 file`
 
 
 
