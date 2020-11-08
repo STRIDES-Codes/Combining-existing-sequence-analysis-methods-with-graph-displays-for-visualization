@@ -88,7 +88,6 @@ def distances_to_tree(
 
 
 if __name__ == "__main__":
-    # TODO: accept other methods and tree formats
     parser = argparse.ArgumentParser(
         description="Compute neighbor-joining tree from distances."
     )
@@ -112,5 +111,15 @@ if __name__ == "__main__":
         "-o", "--outputfile", type=str, required=True, help=r"Output in newick format",
     )
 
+    parser.add_argument(
+        "--method",
+        type=str,
+        choices=["nj", "upgma"],
+        default="nj",
+        help="Method for building tree. Default: nj (neighbor-joining)",
+    )
+
     args = parser.parse_args()
-    distances_to_tree(args.idfile, args.distancefile, args.outputfile)
+    distances_to_tree(
+        args.idfile, args.distancefile, args.outputfile, method=args.method
+    )
