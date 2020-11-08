@@ -29,4 +29,4 @@ geolocations_df = pd.DataFrame(geolocations_tuples, columns=["loc1", "loc2", "lo
 
 # Join with accession_df and export to tsv file named geolocations+accessions.tsv
 
-accession_df.join(geolocation_df).to_csv("/data/geolocations+accession.tsv", sep="\t")
+accession_df.join(geolocations_df).to_csv("/data/geolocations+accession.tsv", sep="\t")
