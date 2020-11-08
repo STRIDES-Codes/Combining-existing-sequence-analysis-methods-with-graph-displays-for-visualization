@@ -25,6 +25,13 @@ Two attributes are calculated as part of the pipeline: variants compared to the 
 #### Files to prepare ahead of running
 + FASTA sequence files
 + source modifiers table *(GenBank submission style?)*
++ Pangolin lineages
+
+#### Requirements
++ flask
++ networkx
++ matplotlib
+
 
 
 #### Considerations
