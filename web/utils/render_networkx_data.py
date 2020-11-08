@@ -47,7 +47,6 @@ def render_json(G):
     # Export data
     n_json = cytoscape.cytoscape_data(G)
     utils_dir = os.path.dirname(os.path.abspath(__file__))
-    utils_dir = os.path.dirname(os.path.abspath(__file__))
     ofilename = '%s/../content/datasets/custom.json' % utils_dir
 
     with open(ofilename, 'w') as f:
