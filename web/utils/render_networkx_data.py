@@ -82,6 +82,34 @@ def render_json(G):
 
     exported_cyto_json = n_json['elements']
 
+    # Color the edges ({1.0, 7.0} community ids)
+    nodes = n_json['elements']['nodes']
+    edges = n_json['elements']['edges']
+    community_membership = {}
+    for node in nodes:
+        community_membership[node['data']['id']] = node['data']['community']
+        
+    community_list = []
+    for node in nodes:
+        community_list.append(node['data']['community'])
+    community_list = list(set(community_list))
+    
+    # import matplotlib.colors
+#     colors = ["darkorange", "gold", "lawngreen", "lightseagreen"]
+#     from matplotlib import cm
+#     viridis = cm.get_cmap('viridis', len(community_list))
+#     viridis
+#     print(viridis)
+#     print(viridis(1))
+#     matplotlib.colors.rgb2hex(viridis(1)[:3])
+#     history
+
+    for edge in edges:
+        edge_id = edge['data']['source']
+        edge['data'].update(dict(community=community_membership[edge_id]))                
+
+    n_json['edges']=edges
+
     with open(ofilename, 'w') as f:
         print(f"Writing cytoscape JSON data file to {ofilename}")
         f.write(json.dumps(exported_cyto_json))
