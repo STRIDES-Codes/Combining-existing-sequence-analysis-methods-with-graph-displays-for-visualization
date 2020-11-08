@@ -5,11 +5,12 @@ Initial version
 """
 
 import os
-import matplotlib.pyplot as plt
-from networkx import nx
-import networkx.readwrite.json_graph
-import networkx.readwrite.json_graph.cytoscape as cytoscape
 import json
+import argparse
+import matplotlib.pyplot as plt
+import networkx
+from networkx import nx
+import networkx.readwrite.json_graph.cytoscape as cytoscape
 
 
 def load_graph(ifilename=None):
@@ -35,7 +36,12 @@ def load_graph(ifilename=None):
         for line in nx.generate_adjlist(G):
             print(line)
     else:
-        pass
+        try:
+            G = networkx.read_graphml(open(ifilename,'r'))
+        except Exception as ifile_err:
+            print(f"Unable to load graph from {ifilename}: {ifile_err}")
+ 
+    return G
 
 
 def render_json(G):
@@ -50,7 +56,27 @@ def render_json(G):
     ofilename = '%s/../content/datasets/custom.json' % utils_dir
 
     with open(ofilename, 'w') as f:
+        print(f"Writing cytoscape JSON data file to {ofilename}")
         f.write(json.dumps(n_json))
+
+
+
+def get_cli_options():
+    """
+
+    """
+    # help flag provides flag help
+    # store_true actions stores argument as True
+
+    parser = argparse.ArgumentParser()
+   
+    parser.add_argument('-i', '--ifilename', type=str, required=True, 
+        help="The filename of the graphml output from igraph.")
+
+    args = parser.parse_args()
+
+    return args
+
 
 
 def main():
@@ -58,8 +84,11 @@ def main():
 
     """
     # TODO: Handle CLI params
-    the_graph = load_graph()
+    cli_options = get_cli_options()
+    ifilename =  cli_options.ifilename
+    the_graph = load_graph(ifilename)
     render_json(the_graph)
+
 
 
 if __name__ == "__main__":

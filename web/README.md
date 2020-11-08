@@ -31,11 +31,12 @@ Navigate your browser to this url
 HOWTO: Generate JSON data (sample) 
 -----------------------------------
 
-Sample data is by default stored in `content/datasets/custom.js`
+Sample JSON data is rendered (by default) in `content/datasets/custom.js`
 
 
 
-    python utils/render_networkx_data.py
+
+    python utils/render_networkx_data.py -i content/datasets/seq_graph.graphml
 
 
 
