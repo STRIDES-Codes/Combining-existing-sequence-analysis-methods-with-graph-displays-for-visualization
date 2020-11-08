@@ -55,9 +55,36 @@ def render_json(G):
     utils_dir = os.path.dirname(os.path.abspath(__file__))
     ofilename = '%s/../content/datasets/custom.json' % utils_dir
 
+    # Export only the 'elements' list
+    # {
+    #     "data": [
+    #       [
+    #         "node_default",
+    #         {}
+    #       ],
+    #       [
+    #         "edge_default",
+    #         {}
+    #       ]
+    #     ],
+    #     "directed": false,
+    #     "multigraph": false,
+    #     "elements": {
+    #       "nodes": [
+    #         {
+    #           "data": {
+    #             "name": "MT704048.1",
+    #             "community": 2,
+    #             "id": "n0",
+    #             "value": "n0"
+    #           }
+    #         },
+
+    exported_cyto_json = n_json['elements']
+
     with open(ofilename, 'w') as f:
         print(f"Writing cytoscape JSON data file to {ofilename}")
-        f.write(json.dumps(n_json))
+        f.write(json.dumps(exported_cyto_json))
 
 
 
