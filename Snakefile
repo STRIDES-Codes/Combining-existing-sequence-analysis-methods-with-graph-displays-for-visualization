@@ -1,5 +1,5 @@
-blast_output = "" # TODO
-distance_file = "" # TODO
+blast_output = "../combined_results.txt"
+distance_file = "../combined_results_distances.tsv"
 cluster_file = "" # TODO
 
 rule get_sequences:
@@ -22,7 +22,10 @@ rule compute_distances:
     output:
         distance_file
     shell:
-        "python preprocessing/computedistances.py -i {input} -o {output}"
+        "python preprocessing/computedistances.py " +
+        "-i {input} -o {output} " +
+        "--distance-metric short_hamming " +
+        "-f 'qacc sacc length qlen slen pident'"
 
 rule calculate_clusters:
     input:
