@@ -8,12 +8,22 @@ Phylogenetic trees are often used to show relationships between genomic sequence
 *(include image of comparison tree:network:network with metadata)*
 
 ## How does it work?
+Nucleotide sequences and associated metadata are used as the input for Colr_Clustr. 
+
+#### Graph visualization
+After filtering out sequences which may be problematic in the analyses, a BLASTn all-against-all comparison is used to build a distance matrix. The distances are used as edge weights in a graph visualization. 
+
+The distance matrix is also used to calculate clusters of sequences. With the SARS-CoV-2 data, we calculated a histogram of the distances to determine appropriate cluster cutoffs.
+
+#### Metadata correlations
+Two attributes are calculated as part of the pipeline: variants compared to the SARS-CoV-2 RefSeq (NC_045512.2), and the Pangolin lineages. Along with the downloaded metadata, which includes the collection location for the sample, the variants and lineages are compared to the sequence clusters to identify statistically-relevant correlations. 
+
+![image](https://github.com/STRIDES-Codes/Combining-existing-sequence-analysis-methods-with-graph-displays-for-visualization/blob/main/Colr_Clustr_diagram1.jpg)
 
 
 ## How to use
 #### Files to prepare ahead of running
 + FASTA sequence files
-+ GFF3 annotation files
 + source modifiers table *(GenBank submission style?)*
 
 
@@ -38,7 +48,7 @@ There are a total of 39,340 SARS-CoV-2 sequences as of Nov 7 2020
 + Seq is longer than 29,500 nucleotides long  37,265  (95%)
 + From an earlier analysis of a random subset of sequences, about 25% have an annotated gap (usually dozens+ nucleotides missing)
 
-After running through filtering script, how many are left?
+After running through filtering script, 28,325 sequences are left.
 
 
 
