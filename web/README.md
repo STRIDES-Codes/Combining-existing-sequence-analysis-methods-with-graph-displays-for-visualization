@@ -6,8 +6,12 @@ Frameworks and tools
 
 
     cytoscape.js: https://github.com/cytoscape/cytoscape.js
+    cytoscape-cola.js: https://github.com/cytoscape/cytoscape.js-cola.git
+    cola.js: https://github.com/tgdwyer/WebCola.git
     cytoscape.js tutorial demo: https://github.com/cytoscape/cytoscape.js-tutorial-demo 
-    networkx
+    networkx (python)
+    flask (python)
+
 
 
 
