@@ -104,11 +104,31 @@ def render_json(G):
 #     matplotlib.colors.rgb2hex(viridis(1)[:3])
 #     history
 
+    new_edge_list = []
     for edge in edges:
-        edge_id = edge['data']['source']
-        edge['data'].update(dict(community=community_membership[edge_id]))                
+        src_id = edge['data']['source']
+        tar_id = edge['data']['target']
+        # Only maintain the edge if nodes are in the same community
+        if community_membership[src_id]==community_membership[tar_id]:
+            edge['data'].update(dict(community=community_membership[src_id]))
+            new_edge_list.append(edge)
 
-    n_json['edges']=edges
+    # Add parent nodes
+    community_parents = []
+    for community in community_list: 
+        community_parents.append(dict(data=dict(id='community_%s' % int(community))))
+
+    new_node_list = []
+    for node in nodes: 
+        parent_id = 'community_%s' % int(community_membership[node['data']['id']]) 
+        node['data'].update(dict(parent=parent_id)) 
+        new_node_list.append(node) 
+
+    new_node_list.extend(community_parents)     
+
+    # Update edge and nodes
+    exported_cyto_json['edges']=new_edge_list
+    exported_cyto_json['nodes']=new_node_list
 
     with open(ofilename, 'w') as f:
         print(f"Writing cytoscape JSON data file to {ofilename}")
