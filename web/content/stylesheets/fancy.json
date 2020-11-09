@@ -183,6 +183,50 @@
       "line-color": "#f0ec86"
     }
   },
+
+  {
+    "selector": "edge[community = \"1\"]",
+    "style": {
+      "line-color": "#e69373"
+    }
+  },
+  {
+    "selector": "edge[community = \"2\"]",
+    "style": {
+      "line-color": "#77d36a"
+    }
+  },
+  {
+    "selector": "edge[community = \"3\"]",
+    "style": {
+      "line-color": "#557aaa"
+    }
+  },
+  {
+    "selector": "edge[community = \"4\"]",
+    "style": {
+      "line-color": "#bf5830"
+    }
+  },
+  {
+    "selector": "edge[community = \"5\"]",
+    "style": {
+      "line-color": "#43bf30"
+    }
+  },
+  {
+    "selector": "edge[community = \"6\"]",
+    "style": {
+      "line-color": "#306ebf"
+    }
+  },
+  {
+    "selector": "edge[community = \"7\"]",
+    "style": {
+      "line-color": "#306e58"
+    }
+  },
+
   {
     "selector": "node[?social]",
     "style": {
