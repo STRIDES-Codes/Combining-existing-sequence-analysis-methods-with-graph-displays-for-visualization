@@ -15,7 +15,7 @@ rule blast_all:
     output:
         blast_output
     shell:
-        "python preprocessing/blastall.py" #TODO: Args
+        "bash blast_all_parallel.sh" #FIXME: output path in script probably doesn't match here
 
 rule compute_distances:
     input:
