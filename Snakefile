@@ -1,6 +1,7 @@
+# TODO: the results should probably go in a data directory.
 blast_output = "../combined_results.txt"
 distance_file = "../combined_results_distances.tsv"
-cluster_file = "" # TODO
+graphml_file = "../graph_cluster.graphml"
 
 rule get_sequences:
     output:
@@ -27,10 +28,10 @@ rule compute_distances:
         "--distance-metric short_hamming " +
         "-f 'qacc sacc length qlen slen pident'"
 
-rule calculate_clusters:
+rule seq_similarity_network:
     input:
         distance_file
     output:
-        cluster_file
+       graphml_file
     shell:
-        "" # TODO
+        "Rscript seq_sim_network.R"
